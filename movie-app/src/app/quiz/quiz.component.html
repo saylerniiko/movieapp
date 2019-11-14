@@ -1,0 +1,8 @@
+<div>
+  <div *ngIf="movie">{{movie.title}}</div>
+  <div *ngIf="cast">
+    <div *ngFor="let person of cast">
+      <input type="checkbox">{{person.name}}
+    </div>
+  </div>
+</div>
