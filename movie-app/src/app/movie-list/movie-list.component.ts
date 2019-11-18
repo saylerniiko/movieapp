@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../services/movie.service';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,23 +10,29 @@ import { FormControl } from '@angular/forms';
 })
 export class MovieListComponent implements OnInit {
   myControl = new FormControl();
-  title = 'Movie Quiz';
   query = '';
-  options: string[] = ['One', 'Two', 'Three'];
   moviesList = [];
-  constructor(private movieService: MovieService) {}
+  constructor(private movieService: MovieService, private router: Router) { }
 
   ngOnInit() {
   }
 
   search(query) {
     this.movieService.search(query)
-    .subscribe(
-      (response) => {
-        this.moviesList = response['results'];
-        console.log(this.moviesList);
+      .subscribe(
+        (response) => {
+          this.moviesList = response['results'];
+          // for(let movie of this.moviesList){
+          //     this.movieService.getPoster(movie.id).subscribe((images) => {
+          //       movie.poster = images.posters[0];
+          //     });
+          // }
+          console.log(this.moviesList);
 
-      }
-    );
+        }
+      );
+  }
+  launchQuizForMovie(id) {
+    this.router.navigate(['./quiz/' + id]);
   }
 }

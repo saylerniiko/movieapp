@@ -9,15 +9,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieService } from './services/movie.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatSidenavModule, MatToolbarModule, MatCardModule } from '@angular/material';
 import { QuizComponent } from './quiz/quiz.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
+import { YearPipe } from './year.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizComponent,
-    MovieListComponent
+    MovieListComponent,
+    YearPipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -27,6 +29,7 @@ import { MovieListComponent } from './movie-list/movie-list.component';
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    MatCardModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,

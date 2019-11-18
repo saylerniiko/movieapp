@@ -1,8 +1,18 @@
-<form class="example-form"fxLayout="row" fxLayoutAlign="center start">
-  <input [(ngModel)]="query" (keyup.enter)="search(query)" name="search"
-    type="search" placeholder="Find movie...">
+<form class="example-form" fxLayout="row" fxLayoutAlign="center start">
+  <input [(ngModel)]="query" (keyup.enter)="search(query)" name="search" type="search" placeholder="Find movie...">
   <button (click)="search(query)">Search</button>
 </form>
-<div *ngFor="let movie of moviesList">
-  <div>{{movie.title}}</div>
-</div>
+
+  <div *ngFor="let movie of moviesList" fxLayout="row" fxLayoutAlign="center middle">
+    <mat-card style="min-width:500px;margin:5px;">
+      <mat-card-title-group (click)="launchQuizForMovie(movie.id)">
+        <img mat-card-sm-image src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+        <mat-card-title>
+          {{movie.title}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          ({{movie.release_date | year}})
+        </mat-card-subtitle>
+      </mat-card-title-group>
+    </mat-card>
+  </div>
