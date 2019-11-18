@@ -2,24 +2,8 @@
 <mat-sidenav-container class="example-container" fxFill>
   <mat-sidenav mode="over" closed>Sidenav content</mat-sidenav>
   <mat-sidenav-content>
-    <form class="example-form"fxLayout="row" fxLayoutAlign="center start">
-      <!-- <mat-form-field class="example-full-width"> -->
-        <!-- <input type="text" placeholder="Enter a movie title" aria-label="Movie" matInput [formControl]="myControl"
-          [matAutocomplete]="auto" />
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{ option }}
-          </mat-option>
-        </mat-autocomplete> -->
-      <!-- </mat-form-field> -->
-      <input [(ngModel)]="query" (keyup.enter)="search(query)" name="search"
-        type="search" placeholder="Find movie...">
-      <button (click)="search(query)">Search</button>
-    </form>
-    <div *ngFor="let movie of moviesList">
-      <div>{{movie.title}}</div>
-    </div>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<router-outlet></router-outlet>
+

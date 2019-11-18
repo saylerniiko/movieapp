@@ -1,0 +1,8 @@
+<form class="example-form"fxLayout="row" fxLayoutAlign="center start">
+  <input [(ngModel)]="query" (keyup.enter)="search(query)" name="search"
+    type="search" placeholder="Find movie...">
+  <button (click)="search(query)">Search</button>
+</form>
+<div *ngFor="let movie of moviesList">
+  <div>{{movie.title}}</div>
+</div>

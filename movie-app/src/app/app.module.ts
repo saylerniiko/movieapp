@@ -11,11 +11,13 @@ import { MovieService } from './services/movie.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { QuizComponent } from './quiz/quiz.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizComponent
+    QuizComponent,
+    MovieListComponent
   ],
   imports: [
     ReactiveFormsModule,
