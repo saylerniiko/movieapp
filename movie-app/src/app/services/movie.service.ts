@@ -15,9 +15,6 @@ export class MovieService {
   getMovie(id) {
     return this.http.get(this.apiUrl + '3/movie/' + id + this.apiKey );
   }
-  getPoster(id) {
-    return this.http.get(this.apiUrl + '3/movie/' + id + '/images' + this.apiKey);
-  }
   getCast(id) {
     return this.http.get(this.apiUrl + '3/movie/' + id + '/credits'  + this.apiKey );
   }

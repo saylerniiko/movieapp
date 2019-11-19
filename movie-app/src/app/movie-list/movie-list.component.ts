@@ -22,13 +22,6 @@ export class MovieListComponent implements OnInit {
       .subscribe(
         (response) => {
           this.moviesList = response['results'];
-          // for(let movie of this.moviesList){
-          //     this.movieService.getPoster(movie.id).subscribe((images) => {
-          //       movie.poster = images.posters[0];
-          //     });
-          // }
-          console.log(this.moviesList);
-
         }
       );
   }

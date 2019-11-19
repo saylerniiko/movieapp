@@ -1,8 +1,17 @@
-<div>
-  <div *ngIf="movie">{{movie.title}}</div>
-  <div *ngIf="cast">
-    <div *ngFor="let person of cast">
-      <input type="checkbox">{{person.name}}
-    </div>
-  </div>
+<div fxLayout="column" fxLayoutAlign="center center">
+<div>Select the two actors that are in {{movie.title}}</div>
+<mat-selection-list #actors  style="max-width: 500px;"  *ngIf="cast" >
+  <mat-list-option *ngFor="let actor of cast" [value]="actor">
+    {{actor.name}}
+  </mat-list-option>
+</mat-selection-list>
+<button mat-raised-button style="margin:10px;width:100px;" color="primary" (click)="submit()" [disabled]="selectedTwo()">Submit</button>
+<mat-card *ngIf="resultSummary">
+  <mat-card-title >{{resultSummary}}</mat-card-title>
+  <mat-card-content>
+    <div *ngFor="let result of results">{{result}}</div>
+  </mat-card-content>
+</mat-card>
+<button mat-raised-button style="margin:10px;width:100px;" (click)="goBack()">Back</button>
+
 </div>

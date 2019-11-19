@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MovieService } from '../services/movie.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
+import { Actor } from '../models/actor';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-quiz',
@@ -9,12 +11,15 @@ import * as _ from 'lodash';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-
-  constructor(private movieService: MovieService, private route: ActivatedRoute) { }
   movie;
   cast = [];
   movieCast = [];
   randomCast = [];
+  results = [];
+  resultSummary = '';
+  @ViewChild('actors', null) actors: ElementRef;
+  constructor(private movieService: MovieService, private route: ActivatedRoute, private router: Router) { }
+
   ngOnInit() {
     this.getMovie();
   }
@@ -41,11 +46,51 @@ export class QuizComponent implements OnInit {
   createActorList(): void {
     this.cast = [];
     for (let i = 0; i < 2; i++) {
-      this.cast.push(this.movieCast[Math.floor(Math.random() * this.movieCast.length)]);
+      let actor = new Actor(this.movieCast[Math.floor(Math.random() * this.movieCast.length)], true);
+      this.cast.push(actor);
     }
     for (let i = 0; i < 3; i++) {
-      this.cast.push(this.randomCast[Math.floor(Math.random() * this.randomCast.length)]);
+      let actor = new Actor(this.randomCast[Math.floor(Math.random() * this.movieCast.length)], false);
+      this.cast.push(actor);
     }
     this.cast = _.shuffle(this.cast);
+  }
+  selectedTwo(): boolean {
+    if (this.actors && !this.resultSummary && this.actors.selectedOptions.selected.length == 2) {
+      return false;
+    }
+    return true;
+  }
+
+  submit() {
+    this.resultSummary = '';
+    this.results = [];
+    let correct = 0;
+    this.actors.selectedOptions.selected.forEach(actor => {
+      if (actor.value.inMovie) {
+        this.results.push(actor.value.name + ' is in ' + this.movie.title + '.');
+        correct++;
+      } else {
+        this.results.push(actor.value.name + ' is not in ' + this.movie.title + '.')
+      }
+      switch (correct) {
+        case 0:
+          this.resultSummary = 'Oh no! You didn\'t get any of them correct.';
+          break;
+        case 1:
+          this.resultSummary = 'You were partially correct.';
+          break;
+        case 2:
+          this.resultSummary = 'Congratulations you got both actors correct!!';
+          break;
+        default:
+          this.resultSummary = 'I don\'t know what you did but lets pretend you didn\'t';
+          break;
+      }
+
+    });
+  }
+  goBack() {
+    this.router.navigate(['./']);
   }
 }

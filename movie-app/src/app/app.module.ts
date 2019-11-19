@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MovieService } from './services/movie.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatSidenavModule, MatToolbarModule, MatCardModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatAutocompleteModule, MatSidenavModule,
+  MatToolbarModule, MatCardModule, MatCheckboxModule, MatListModule, MatButtonModule } from '@angular/material';
 import { QuizComponent } from './quiz/quiz.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { YearPipe } from './year.pipe';
@@ -30,9 +31,12 @@ import { YearPipe } from './year.pipe';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatCardModule,
+    MatListModule,
+    MatButtonModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatCheckboxModule,
     FlexLayoutModule,
     HttpClientModule
 
