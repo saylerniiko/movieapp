@@ -1,18 +1,19 @@
-<form class="example-form" fxLayout="row" fxLayoutAlign="center start">
-  <input [(ngModel)]="query" (keyup.enter)="search(query)" name="search" type="search" placeholder="Find movie...">
-  <button (click)="search(query)">Search</button>
+<form fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field class="example-full-width">
+    <input matInput [(ngModel)]="query" type="search" name="search" (keyup)="search(query)" placeholder="Find movie...">
+  </mat-form-field>
+  <button mat-raised-button style="width:100px" (click)="search(query)">Search</button>
 </form>
-
-  <div *ngFor="let movie of moviesList" fxLayout="row" fxLayoutAlign="center middle">
-    <mat-card style="min-width:500px;margin:5px;">
-      <mat-card-title-group (click)="launchQuizForMovie(movie.id)">
-        <img mat-card-sm-image src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
-        <mat-card-title>
-          {{movie.title}}
-        </mat-card-title>
-        <mat-card-subtitle>
-          ({{movie.release_date | year}})
-        </mat-card-subtitle>
-      </mat-card-title-group>
-    </mat-card>
-  </div>
+<div *ngFor="let movie of moviesList" fxLayout="row" fxLayoutAlign="center middle">
+  <mat-card style="min-width:500px;margin:5px;">
+    <mat-card-title-group (click)="launchQuizForMovie(movie.id)">
+      <img mat-card-sm-image src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+      <mat-card-title>
+        {{movie.title}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        ({{movie.release_date | year}})
+      </mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card>
+</div>
