@@ -7,7 +7,7 @@
 <div *ngFor="let movie of moviesList" fxLayout="row" fxLayoutAlign="center middle">
   <mat-card style="min-width:500px;margin:5px;">
     <mat-card-title-group (click)="launchQuizForMovie(movie.id)">
-      <img mat-card-sm-image src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}">
+      <img mat-card-sm-image src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" onError="this.src='./assets/images/test.png';">
       <mat-card-title>
         {{movie.title}}
       </mat-card-title>
