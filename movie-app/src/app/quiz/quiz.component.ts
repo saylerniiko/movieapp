@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as _ from 'lodash';
 import { Actor } from '../models/actor';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatSelectionList } from '@angular/material';
 
 @Component({
   selector: 'app-quiz',
@@ -17,7 +18,7 @@ export class QuizComponent implements OnInit {
   randomCast = [];
   results = [];
   resultSummary = '';
-  @ViewChild('actors', null) actors: ElementRef;
+  @ViewChild('actors', null) actors: MatSelectionList;
   constructor(private movieService: MovieService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class QuizComponent implements OnInit {
         console.log(this.movie);
       });
     this.movieService.getCast(id)
-      .subscribe(credits => {
+      .subscribe((credits: any) => {
         this.movieCast = credits.cast.slice(0, 10);
         this.createActorList();
         console.log(this.cast);
@@ -46,17 +47,24 @@ export class QuizComponent implements OnInit {
   createActorList(): void {
     this.cast = [];
     for (let i = 0; i < 2; i++) {
-      let actor = new Actor(this.movieCast[Math.floor(Math.random() * this.movieCast.length)], true);
+      const actor = new Actor(this.movieCast[Math.floor(Math.random() * this.movieCast.length)], true);
       this.cast.push(actor);
     }
     for (let i = 0; i < 3; i++) {
-      let actor = new Actor(this.randomCast[Math.floor(Math.random() * this.movieCast.length)], false);
-      this.cast.push(actor);
+      const actor = new Actor(this.randomCast[Math.floor(Math.random() * this.randomCast.length)], false);
+      if (_.find(this.cast, { id: actor.id })) {
+        // if the actor already exists in the list don't add it and try again.
+        // (this happens with popular movies since popular actors are in popular movies)
+        i--;
+      } else {
+        this.cast.push(actor);
+      }
+
     }
     this.cast = _.shuffle(this.cast);
   }
   selectedTwo(): boolean {
-    if (this.actors && !this.resultSummary && this.actors.selectedOptions.selected.length == 2) {
+    if (this.actors && !this.resultSummary && this.actors.selectedOptions.selected.length === 2) {
       return false;
     }
     return true;

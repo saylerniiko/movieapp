@@ -19,8 +19,8 @@ export class MovieListComponent implements OnInit {
   search(query) {
     this.movieService.search(query)
       .subscribe(
-        (response) => {
-          this.moviesList = response['results'];
+        (response: any) => {
+          this.moviesList = response.results;
         }
       );
   }
