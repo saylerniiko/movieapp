@@ -45,6 +45,9 @@ export class QuizComponent implements OnInit {
       });
   }
   createActorList(): void {
+    if (!this.movieCast || !this.randomCast) {
+      return;
+    }
     this.cast = [];
     for (let i = 0; i < 2; i++) {
       const actor = new Actor(this.movieCast[Math.floor(Math.random() * this.movieCast.length)], true);
