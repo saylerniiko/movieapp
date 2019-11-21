@@ -45,7 +45,7 @@ export class QuizComponent implements OnInit {
       });
   }
   createActorList(): void {
-    if (!this.movieCast || !this.randomCast) {
+    if (!((this.movieCast && this.movieCast.length > 0) && (this.randomCast && this.randomCast.length > 0))) {
       return;
     }
     this.cast = [];
@@ -79,7 +79,7 @@ export class QuizComponent implements OnInit {
     let correct = 0;
     this.actors.selectedOptions.selected.forEach(actor => {
       if (actor.value.inMovie) {
-        this.results.push(actor.value.name + ' is in ' + this.movie.title + '.');
+        this.results.push(actor.value.name + ' plays the role of ' + actor.value.role + ' in ' + this.movie.title + '.');
         correct++;
       } else {
         this.results.push(actor.value.name + ' is not in ' + this.movie.title + '.')

@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center">
-  <div>Select the two actors that are in {{movie.title}}</div>
+  <div *ngIf="movie">Select the two actors that are in {{movie.title}}</div>
   <mat-selection-list #actors style="max-width: 500px;" *ngIf="cast">
     <mat-list-option *ngFor="let actor of cast" [value]="actor">
       {{actor.name}}
